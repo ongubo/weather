@@ -2,10 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use MongoDB\Driver\Manager;
 
 class Weather extends Eloquent
 {
-    //
+    protected $guarded      = array();
+    protected $collection = 'weather_data';
+    protected $connection   = 'mongodb';
+    
 }
