@@ -11,4 +11,5 @@
 |
 */
 
-Route::get('/', ['uses' => 'HomeController@saveWeather']);
+Route::get('/', ['uses' => 'HomeController@home']);
+Route::post('weather', ['uses' => 'HomeController@saveWeather']);
