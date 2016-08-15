@@ -3,39 +3,27 @@
     <head>
         <title>Weather</title>
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-family: 'Raleway', sans-serif;
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 50px;
-            }
-        </style>
+        <link href="{{ URL::asset('assets/bootstrap.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
         <div class="container">
-            <div class="content">
-                <div class="title">Weather</div>
-            </div>
+            <form class="form-horizontal" method="post" action="weather">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <fieldset>
+                    <legend>Enter Location</legend>
+                    <div class="form-group">
+                        <label for="city" class="col-lg-2 control-label">Location</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="city" required id="city" placeholder="e.g. Nairobi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-primary">Get Weather info</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </body>
 </html>
