@@ -7,6 +7,16 @@
     </head>
     <body>
         <div class="container row  centered">
+            @if ($error)
+            <div class="col-md-6 col-md-offset-3">
+                <h3 style="text-transform: capitalize;">Error! for location {{$city}}</h3>
+                <hr>
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Error! </strong> {{$error_message}}
+                </div>
+            </div>
+            @else
             <div class="col-md-6 col-md-offset-3">
                 <h3 style="text-transform: capitalize;">Weather for {{$city}}</h3>
                 <hr>
@@ -60,6 +70,9 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            @endif
+            <div class="col-md-6 col-md-offset-3">
                 <a href="/" class="btn btn-primary">Another location</a>
             </div>
         </div>

@@ -16,17 +16,28 @@ class HomeController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json_output            = curl_exec($ch);
         $weather_data           = json_decode($json_output);
-        Weather::create([
-            'city'         => $weather_data->location->name,
-            'country'      => $weather_data->location->country,
-            'temp_celcius' => $weather_data->current->temp_c,
-            'temp_far'     => $weather_data->current->temp_f,
-            'condition'     => $weather_data->current->condition->text,
-        ]);
-        return view('responce', [
-            'weather_data' => $weather_data,
-            'city'         => $city,
-        ]);
+        if (array_key_exists('error', $weather_data)) {
+        	return view('responce', [
+	            'error_message'	=> $weather_data->error->message,
+	            'error'	=> true,
+	            'city'	=> $city,
+	        ]);
+        }
+        else{
+        	Weather::create([
+	            'city'         => $weather_data->location->name,
+	            'country'      => $weather_data->location->country,
+	            'temp_celcius' => $weather_data->current->temp_c,
+	            'temp_far'     => $weather_data->current->temp_f,
+	            'condition'     => $weather_data->current->condition->text,
+	        ]);
+	        return view('responce', [
+	            'weather_data' => $weather_data,
+	            'error'         => false,
+	            'city'         => $city,
+	        ]);
+        }
+        
     }
     public function home()
     {
