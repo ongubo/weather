@@ -16,6 +16,13 @@ class HomeController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json_output            = curl_exec($ch);
         $weather_data           = json_decode($json_output);
+        if (is_null($weather_data)) {
+        	return view('responce', [
+	            'error_message'	=> 'Unknown error occured',
+	            'error'	=> true,
+	            'city'	=> $city,
+	        ]);
+        }
         if (array_key_exists('error', $weather_data)) {
         	return view('responce', [
 	            'error_message'	=> $weather_data->error->message,
